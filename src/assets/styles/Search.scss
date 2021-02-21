@@ -1,0 +1,29 @@
+.back {
+  background-color: #ffe60d;
+  height: 60px;
+}
+
+.search__logo {
+  width: 66px;
+  margin-top: 6px;
+}
+
+.search__input {
+  width: 89%;
+  margin-top: 11px;
+  border-style: none;
+  height: 37px;
+  border-radius: 3px;
+  padding-left: 13px;
+}
+
+.search__input:focus {
+  outline: none;
+}
+
+.search__lens {
+  background: #eeeeee;
+  height: 37px;
+  padding: 9px;
+  margin-top: -5px;
+}
