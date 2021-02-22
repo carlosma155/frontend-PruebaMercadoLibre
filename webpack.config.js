@@ -58,7 +58,11 @@ module.exports = {
         compress: true,
         open: true,
         historyApiFallback: true,
-        port: 8000
+        port: 8000,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+        }
     },
     plugins: [
         new HtmlWebPackPlugin({
