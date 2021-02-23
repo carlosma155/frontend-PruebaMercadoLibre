@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import { fillSearch, getItems, unmountSearch, unmountItems } from '../actions';
+import { fillSearch, getItems, unmountSearch, unmountItems, unmountItemDetails } from '../actions';
 import logo from '../assets/static/logoML.png';
 import lens from '../assets/static/search.png';
 
@@ -23,6 +23,7 @@ const Search = (props) => {
     const handleUnmount = (e) => {
         props.unmountSearch('')
         props.unmountItems([])
+        props.unmountItemDetails({})
     }
 
     const history = useHistory();
@@ -74,7 +75,8 @@ const mapToDispatchToProps = {
     getItems,
     fillSearch,
     unmountSearch,
-    unmountItems
+    unmountItems,
+    unmountItemDetails
 }
 
 export default connect(mapStateToProps, mapToDispatchToProps)(Search);

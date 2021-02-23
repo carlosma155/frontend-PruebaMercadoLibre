@@ -12,6 +12,12 @@ const reducer = (state, action) => {
                 items: action.payload
             }
 
+        case 'GET_ITEM_DETAILS':
+            return {
+                ...state,
+                itemDetail: action.payload
+            }
+
         case 'UNMOUNT_SEARCH':
             return {
                 ...state,
@@ -22,6 +28,12 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 items: action.payload
+            }
+
+        case 'UNMOUNT_ITEM_DETAILS':
+            return {
+                ...state,
+                itemDetail: action.payload
             }
 
         default:

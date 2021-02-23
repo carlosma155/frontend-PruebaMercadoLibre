@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import shipping from '../assets/static/shipping.png';
 
 import '../assets/styles/Item.scss';
@@ -10,6 +9,7 @@ const Item = (props) => {
     const item = props.items[0];
 
     const itemPrice = item.price.amount.toLocaleString();
+    const itemCondition = item.condition === "new" ? "Nuevo" : "Usado" || " ";
 
     return (        
             <div className="container item__back">
@@ -29,7 +29,7 @@ const Item = (props) => {
                         <Link to={`/items/${item.id}`} className="item__button">
                             <p className="item__container-title">{item.title}</p>
                         </Link>
-                        <p>{item.condition}</p>
+                        <p>{itemCondition}</p>
                     </div>
                     <div className="d-none d-lg-block col-lg-2">
                         <p className="item__address">{item.address}</p>       
@@ -39,8 +39,4 @@ const Item = (props) => {
     )
 }
 
-const mapToDispatchToProps = {
-    
-}
-
-export default connect(null, mapToDispatchToProps)(Item)
+export default Item;
