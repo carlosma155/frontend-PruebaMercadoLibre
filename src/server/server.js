@@ -1,6 +1,15 @@
 import express from 'express';
 import webpack from 'webpack';
 import config  from './config';
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { StaticRouter } from 'react-router-dom'
+import { renderRoutes } from 'react-router-config';
+import serverRoutes from '../frontend/routes/serverRoutes';
+import reducer from '../frontend/reducers'
+import initialState from '../frontend/initialState';
 
 const app = express();
 const { port, env } = config
@@ -17,8 +26,9 @@ if (env === 'development') {
   app.use(webpackHotMiddleware(compiler));
 }
 
-app.get('*', (req, res) => {
-  res.send(`
+const setResponse = (html) => {
+  return (
+    `
   <!DOCTYPE html>
     <html lang="es">
       <head>
@@ -29,11 +39,27 @@ app.get('*', (req, res) => {
           <title>Prueba Mercado Libre</title>
       </head>
       <body>
-          <div id="app"></div>
+          <div id="app">${html}</div>
           <script src="assets/app.js" type="text/javascript"></script>
       </body>
-  </html>`);
-});
+  </html>`
+  )
+}
+
+const renderApp = (req, res) => {
+  const store = createStore(reducer, initialState);
+  const html = renderToString(
+    <Provider store={store}>
+        <StaticRouter location={req.url} context={{}}>
+            {renderRoutes(serverRoutes)}
+        </StaticRouter>
+    </Provider>
+  )
+  
+  res.send(setResponse(html))
+}
+
+app.get('*', renderApp);
 
 app.listen(port, (err) => {
   if (err) console.log(err);

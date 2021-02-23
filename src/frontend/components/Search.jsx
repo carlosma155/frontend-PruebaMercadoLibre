@@ -56,7 +56,7 @@ const Search = (props) => {
                         >                            
                         </input>
                         <Link to="/items" onClick={handleClick}>
-                            <img className="search__lens" src={lens} alt="Logo Mercado Libre" />
+                            <img className="search__lens" src={lens} alt="Logo de busqueda" />
                         </Link>
                     </div>
                 </div>
