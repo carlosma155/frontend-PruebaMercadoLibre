@@ -26,42 +26,48 @@ if (env === 'development') {
   app.use(webpackHotMiddleware(compiler));
 }
 
-const setResponse = (html) => {
-  return (
-    `
+const setResponse = (html, preloadedState) => {
+  return (`
   <!DOCTYPE html>
-    <html lang="es">
-      <head>
-          <meta charset="UTF-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <link rel="stylesheet" href="assets/app.css" type="text/css">
-          <title>Prueba Mercado Libre</title>
-      </head>
-      <body>
-          <div id="app">${html}</div>
-          <script src="assets/app.js" type="text/javascript"></script>
-      </body>
-  </html>`
-  )
+  <html lang="en">
+  
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="assets/app.css" type="text/css">
+      <title>Platzi Video</title>
+  </head>
+  
+  <body>
+      <div id="app">${html}</div>
+      <script>
+          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+      </script>
+      <script src="assets/app.js" type="text/javascript"></script>
+  </body>
+  
+  </html>
+  `);
 }
 
 const renderApp = (req, res) => {
   const store = createStore(reducer, initialState);
+  const preloadedState = store.getState();
   const html = renderToString(
-    <Provider store={store}>
-        <StaticRouter location={req.url} context={{}}>
-            {renderRoutes(serverRoutes)}
-        </StaticRouter>
-    </Provider>
-  )
-  
-  res.send(setResponse(html))
+      <Provider store={store}>
+          <StaticRouter location={req.url} context={{}}>
+              {renderRoutes(serverRoutes)}
+          </StaticRouter>
+      </Provider>,
+  );
+
+  res.send(setResponse(html, preloadedState));
 }
 
 app.get('*', renderApp);
 
 app.listen(port, (err) => {
-  if (err) console.log(err);
-  else console.log(`Server running on port ${port}`);
+  err
+     ? console.log(err)
+     : console.log(`Server running on port ${port}`);
 });
