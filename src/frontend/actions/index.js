@@ -37,10 +37,7 @@ export const setError = (payload) => ({
 
 export const getItems = (query) => {
     return (dispatch) => {
-        axios({
-            url: `http://localhost:3000/api/items?q=${query}`,
-            method: 'get'
-        })
+        axios.get(`/serverItems?query=${query}`)
         .then(({ data }) => dispatch(getItemsList(data)))
         .catch(error => dispatch(setError(error)))
     }
@@ -48,11 +45,12 @@ export const getItems = (query) => {
 
 export const getItem = (itemId) => {
     return (dispatch) => {
-        axios({
-            url: `http://localhost:3000/api/items/${itemId}`,
-            method: 'get'
+        axios.get(`/serverItems/${itemId}`)
+        .then(({ status, data }) => {
+            if(status === 200) {
+                dispatch(getItemDetails(data))
+            }
         })
-        .then(({ data }) => dispatch(getItemDetails(data.data)))
         .catch(error => dispatch(setError(error)))
     }
 }

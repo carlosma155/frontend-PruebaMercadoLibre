@@ -1,7 +1,7 @@
 const initialState = {
     "search": '',
     "items": [],
-    "itemDetail": {}
+    "itemDetails": {}
 }
 
 export default initialState;

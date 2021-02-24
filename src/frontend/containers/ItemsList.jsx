@@ -9,27 +9,27 @@ import '../assets/styles/ItemsList.scss';
 const ItemsList = (props) => {
 
     const { items } = props;
-    const { data } = items;
-    const breadcrumbTitle = data && data[0].categories[0];
+    const breadcrumbTitle = items[0]?.categories[0];
 
     return (
         <>            
             <Search />
-            <Breadcrumb title={breadcrumbTitle} />
+            <Breadcrumb title={breadcrumbTitle} />            
             <div className="container items__list">
-                {data?.map(item => ( 
+                {items?.map(item => ( 
                     <li className="col-12" key={item.items.map(x => x.id).toString()}>
                         <Item {...item} />
                     </li>
                 ))} 
-            </div>  
+            </div>             
         </>
     )
 }
 
 const mapStateToProps = (state) => {
     return {
-        items: state.items
+        items: state.items,
+        search: state.search
     }
 }
 

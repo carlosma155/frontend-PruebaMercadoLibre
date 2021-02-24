@@ -17,6 +17,7 @@ const Search = (props) => {
     }
 
     const handleClick = (e) => {
+        props.unmountItems([])
         props.getItems(search);
     }
 
@@ -30,8 +31,9 @@ const Search = (props) => {
 
     const handlePressEnter = (e) => {
         if(e.which === 13) {
+            props.unmountItems([])
             props.getItems(search);
-            history.push('/items')
+            history.push(`/items`)
         }
     }
 

@@ -15,7 +15,7 @@ const reducer = (state, action) => {
         case 'GET_ITEM_DETAILS':
             return {
                 ...state,
-                itemDetail: action.payload
+                itemDetails: action.payload
             }
 
         case 'UNMOUNT_SEARCH':
@@ -33,7 +33,7 @@ const reducer = (state, action) => {
         case 'UNMOUNT_ITEM_DETAILS':
             return {
                 ...state,
-                itemDetail: action.payload
+                itemDetails: action.payload
             }
 
         default:

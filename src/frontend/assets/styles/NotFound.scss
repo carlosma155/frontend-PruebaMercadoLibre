@@ -1,16 +1,9 @@
 #NotFound {
-  background: radial-gradient(
-    farthest-side ellipse at 10% 0,
-    #1d3557 20%,
-    #1d3557
-  );
-  padding-top: 75px;
-  filter: grayscale(20%);
-  padding-bottom: 25px;
+  height: 100vh;
   text-align: center;
 }
 
 .NotFound__logo {
   width: calc(100% / 3);
-  padding: 1rem 0;
+  padding: 3rem 0;
 }

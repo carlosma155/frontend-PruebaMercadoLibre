@@ -18,9 +18,9 @@ const ItemDetails = (props) => {
         }
     }, [])
 
-    const { itemDetail } = props;
-    const { item } = itemDetail || {};
-    const itemPrice = item?.price.amount.toLocaleString();
+    const { itemDetails } = props;
+    const { item } = itemDetails || {};
+    const itemPrice = item?.price.amount.toLocaleString('de-DE');
     const itemDecimal = item?.price.decimals.toFixed(2).slice(2);   
     const itemCondition = item?.condition === "new" ? "Nuevo" : "Usado" || " "; 
 
@@ -30,10 +30,10 @@ const ItemDetails = (props) => {
             <Breadcrumb title={item?.category} />
             {item && <div className="container itemDetails">
                 <div className="row">
-                    <div className="col-12 col-lg-9 col-xl-8">
+                    <div className="col-12 col-lg-8 col-xl-8">
                         <img className="itemDetails__image" src={item?.picture}/>
                     </div>
-                    <div className="col-6 col-lg-3 col-xl-4">
+                    <div className="col-8 col-lg-4">
                         <div className="itemDetails_text">
                             <p className="itemDetails__condition">{itemCondition}{' - '}{item?.sold_quantity}{' '}vendidos</p>
                             <p className="itemDetails__title">{item?.title}</p>
@@ -60,7 +60,7 @@ const ItemDetails = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        itemDetail: state.itemDetail
+        itemDetails: state.itemDetails
     }
 }
 

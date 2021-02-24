@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack serve --mode development",
-    "start:dev": "nodemon src/server/index"
+    "start": "nodemon --inspect src/server/index"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "@babel/register": "^7.13.0",
     "asset-require-hook": "^1.2.0",
     "axios": "^0.21.1",

@@ -8,7 +8,7 @@ const Item = (props) => {
 
     const item = props.items[0];
 
-    const itemPrice = item.price.amount.toLocaleString();
+    const itemPrice = item.price.amount.toLocaleString('de-DE');
     const itemCondition = item.condition === "new" ? "Nuevo" : "Usado" || " ";
 
     return (        
